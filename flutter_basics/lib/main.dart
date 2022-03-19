@@ -5,6 +5,9 @@ import './questions.dart';
 import 'package:flutter/material.dart';
 import './answers.dart';
 import './questions.dart';
+import './quiz.dart';
+import './result.dart';
+import './alert_box.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +19,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static const questions = [
+  static const _questions = [
     {
       "question":
           "In what children's game are participants chased by someone designated \"It\"?",
@@ -616,13 +619,28 @@ class _MyAppState extends State<MyApp> {
     },
   ];
   var _questionIndex = 0;
+  // List listOfOptions = _questions[0]['content'] as List;
 
   void _answerQuestion() {
-    if (_questionIndex < questions.length) {
-      setState(() {
-        _questionIndex = _questionIndex + 1;
-        print(_questionIndex);
-      });
+    if (_questionIndex < _questions.length) {
+      int correctOption = _questions[_questionIndex]['correct'] as int;
+      List<String> listOfOptions =
+          _questions[_questionIndex]['content'] as List<String>;
+      print(listOfOptions);
+      print(listOfOptions[correctOption]);
+      for (String e in listOfOptions) {
+        if (e == listOfOptions[correctOption]) {
+          AlertBox(
+            AnswerOption: listOfOptions,
+            correctOption: correctOption,
+            questionIndex: _questionIndex,
+          );
+        } else {
+          const AlertDialog(
+            content: Text('Wrong answer'),
+          );
+        }
+      }
     } else {
       print('You have Finshed the Available questions');
     }
@@ -635,26 +653,15 @@ class _MyAppState extends State<MyApp> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Quiz App'),
-        backgroundColor: Color.fromARGB(255, 109, 154, 175),
+        backgroundColor: Color.fromARGB(255, 85, 135, 158),
       ),
-      body: _questionIndex < questions.length
-          ? Column(
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                Questions(
-                  questions[_questionIndex]['question'] as String,
-                ),
-                ...(questions[_questionIndex]['content'] as List<String>).map(
-                  (ans) =>
-                      Answer(selectHandler: _answerQuestion, ButtonText: ans),
-                ),
-              ],
+      body: _questionIndex < _questions.length
+          ? Quiz(
+              answerQuestion: _answerQuestion,
+              questionIndex: _questionIndex,
+              questions: _questions,
             )
-          : const Center(
-              child: Text(
-                'You did it ',
-              ),
-            ),
+          : Result(),
     ));
   }
 }

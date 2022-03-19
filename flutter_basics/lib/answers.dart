@@ -12,6 +12,8 @@ class Answer extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: RaisedButton(
+        elevation: 6.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Text(
           ButtonText,
           style: TextStyle(
