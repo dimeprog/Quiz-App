@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
-import './answers.dart';
+
 import './questions.dart';
+import './answers.dart';
 
 class Quiz extends StatelessWidget {
-  final List questions;
+  final List<Map<String, Object>> questions;
   final int questionIndex;
   final void Function() answerQuestion;
+
   Quiz({
-    required this.answerQuestion,
     required this.questions,
+    required this.answerQuestion,
     required this.questionIndex,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      // ignore: prefer_const_literals_to_create_immutables
       children: [
-        Questions(
-          questions[questionIndex]['question'] as String,
+        Question(
+          questions[questionIndex]['questionText'] as String,
         ),
-        ...(questions[questionIndex]['content'] as List<String>).map(
-          (ans) => Answer(selectHandler: answerQuestion, ButtonText: ans),
-        ),
+        ...(questions[questionIndex]['answers'] as List<String>).map((answer) {
+          return Answer(answerQuestion, answer);
+        }).toList()
       ],
     );
   }

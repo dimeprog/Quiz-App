@@ -1,28 +1,20 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
   final void Function() selectHandler;
-  final String ButtonText;
-  Answer({required this.selectHandler, required this.ButtonText});
+  final String answerText;
+
+  Answer(this.selectHandler, this.answerText);
+
   @override
   Widget build(BuildContext context) {
-    // ignore: sized_box_for_whitespace
     return Container(
       width: double.infinity,
       child: RaisedButton(
-        elevation: 6.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Text(
-          ButtonText,
-          style: TextStyle(
-            fontSize: 18,
-          ),
-        ),
-        onPressed: selectHandler,
         color: Colors.blue,
         textColor: Colors.white,
+        child: Text(answerText),
+        onPressed: selectHandler,
       ),
     );
   }

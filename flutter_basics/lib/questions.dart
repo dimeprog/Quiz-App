@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 
-class Questions extends StatelessWidget {
+class Question extends StatelessWidget {
   final String questionText;
 
-  Questions(this.questionText);
+  Question(this.questionText);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
       width: double.infinity,
-      margin: const EdgeInsets.all(30),
+      margin: EdgeInsets.all(10),
       child: Text(
         questionText,
+        style: TextStyle(fontSize: 28),
         textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 23,
-          color: Colors.black,
-        ),
       ),
     );
   }
