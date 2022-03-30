@@ -7,8 +7,9 @@ class Questions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(16.0),
       width: double.infinity,
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(30),
       child: Text(
         questionText,
         textAlign: TextAlign.center,

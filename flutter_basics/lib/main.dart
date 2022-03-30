@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
 import 'dart:ffi';
+import 'package:alert/alert.dart';
+
 import './questions.dart';
 import 'package:flutter/material.dart';
 import './answers.dart';
@@ -630,6 +632,7 @@ class _MyAppState extends State<MyApp> {
       print(listOfOptions[correctOption]);
       for (String e in listOfOptions) {
         if (e == listOfOptions[correctOption]) {
+          Alert(message: 'test', shortDuration: true).show();
           AlertBox(
             AnswerOption: listOfOptions,
             correctOption: correctOption,
